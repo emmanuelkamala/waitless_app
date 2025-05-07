@@ -1,25 +1,30 @@
 Rails.application.routes.draw do
-  get "dashboards/show"
-  get "availabilities/index"
-  get "availabilities/new"
-  get "availabilities/create"
-  get "availabilities/edit"
-  get "availabilities/update"
-  get "availabilities/destroy"
-  get "appointments/index"
-  get "appointments/new"
-  get "appointments/create"
-  get "appointments/show"
-  get "appointments/edit"
-  get "appointments/update"
-  get "appointments/destroy"
-  get "hospitals/index"
-  get "hospitals/show"
-  get "doctors/index"
-  get "doctors/show"
-  get "doctors/search"
-  get "home/index"
+  
   devise_for :users
+  root to: 'home#index'
+
+  resources :doctors, only: [:index, :show] do
+    collection do
+      get :search
+    end
+    resources :appointments, only: [:new, :create]
+  end
+
+  resources :hospitals, only: [:index, :show]
+
+  resources :appointments, only: [:index, :show, :edit, :update, :destroy]
+
+  resources :availabilities, except: [:show]
+
+  get 'dashboard', to: 'dashboards#show'
+
+  # API endpoints for maps
+  namespace :api do
+    namespace :v1 do
+      get 'doctors/nearby', to: 'doctors#nearby'
+      get 'hospitals/nearby', to: 'hospitals#nearby'
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

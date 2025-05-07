@@ -9,8 +9,16 @@
     }).addTo(map);
     
     <% markers.each do |marker| %>
-      L.marker([<%= marker[:latitude] %>, <%= marker[:longitude] %>]).addTo(map)
-        .bindPopup("<%= marker[:popup_html] %>");
+      <% if marker[:icon] %>
+        const <%= "marker#{marker.object_id}" %> = L.marker(
+          [<%= marker[:latitude] %>, <%= marker[:longitude] %>],
+          { icon: L.icon(<%= marker[:icon].to_json %>) }
+        ).addTo(map)
+          .bindPopup("<%= marker[:popup_html] %>");
+      <% else %>
+        L.marker([<%= marker[:latitude] %>, <%= marker[:longitude] %>]).addTo(map)
+          .bindPopup("<%= marker[:popup_html] %>");
+      <% end %>
     <% end %>
   });
 </script>

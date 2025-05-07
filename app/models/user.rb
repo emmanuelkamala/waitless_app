@@ -12,5 +12,5 @@ class User < ApplicationRecord
   has_many :appointments_as_patient, class_name: 'Appointment', foreign_key: 'patient_id'
   has_many :appointments_as_doctor, through: :doctor, source: :appointments
 
-  validates :first_name, :last_name, presence: true
+  #validates :first_name, :last_name, presence: true
 end

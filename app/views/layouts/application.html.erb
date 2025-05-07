@@ -23,8 +23,12 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
+    <div class="min-h-screen flex flex-col">
+    <%= render "layouts/nav" %>
+      <main class="flex-grow">
+        <%= yield %>
+      </main>
+    <%= render "layouts/footer" %>
+    </div>
   </body>
 </html>

@@ -1,0 +1,16 @@
+<div id="map" class="h-96 w-full rounded-lg border border-gray-200"></div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const map = L.map('map').setView([<%= latitude %>, <%= longitude %>], 13);
+    
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    
+    <% markers.each do |marker| %>
+      L.marker([<%= marker[:latitude] %>, <%= marker[:longitude] %>]).addTo(map)
+        .bindPopup("<%= marker[:popup_html] %>");
+    <% end %>
+  });
+</script>

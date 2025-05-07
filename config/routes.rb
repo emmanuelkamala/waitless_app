@@ -1,4 +1,24 @@
 Rails.application.routes.draw do
+  get "dashboards/show"
+  get "availabilities/index"
+  get "availabilities/new"
+  get "availabilities/create"
+  get "availabilities/edit"
+  get "availabilities/update"
+  get "availabilities/destroy"
+  get "appointments/index"
+  get "appointments/new"
+  get "appointments/create"
+  get "appointments/show"
+  get "appointments/edit"
+  get "appointments/update"
+  get "appointments/destroy"
+  get "hospitals/index"
+  get "hospitals/show"
+  get "doctors/index"
+  get "doctors/show"
+  get "doctors/search"
+  get "home/index"
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

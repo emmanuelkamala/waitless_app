@@ -4,6 +4,8 @@ class Availability < ApplicationRecord
   validates :start_time, :end_time, presence: true
   validate :end_time_after_start_time
 
+  scope :future, -> { where('start_time >= ?', Time.current) }
+
   private
 
   def end_time_after_start_time

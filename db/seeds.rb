@@ -86,18 +86,18 @@ doctors.each do |doctor|
 end
 
 # Create Patient Users
-patients = [
+users = [
   { email: 'patient1@example.com', first_name: 'Alice', last_name: 'Johnson' },
   { email: 'patient2@example.com', first_name: 'Bob', last_name: 'Williams' },
   { email: 'patient3@example.com', first_name: 'Charlie', last_name: 'Brown' }
 ]
 
-patients.each do |patient|
-  User.find_or_create_by!(email: patient[:email]) do |user|
+users.each do |u|
+  User.find_or_create_by!(email: u[:email]) do |user|
     user.password = 'password'
     user.role = :patient
-    user.first_name = patient[:first_name]
-    user.last_name = patient[:last_name]
+    user.first_name = u[:first_name]
+    user.last_name = u[:last_name]
   end
 end
 
@@ -120,12 +120,12 @@ Doctor.all.each do |doctor|
 end
 
 # Create Appointments
-patient_users = User.where(role: 'patient')
+user = User.where(role: 'patient')
 doctors = Doctor.all
 
 10.times do |i|
   Appointment.create!(
-    patient: patient_users.sample,
+    user: user.sample,
     doctor: doctors.sample,
     hospital: doctors.sample.hospital,
     appointment_date: Time.current + (i + 1).days + rand(9..17).hours,

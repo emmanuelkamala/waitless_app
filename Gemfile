@@ -51,7 +51,7 @@ gem 'geocoder'
 gem 'leaflet-rails'
 
 # Date/time handling
-gem 'simple_calendar', '~> 2.0'
+gem 'simple_calendar', '~> 3.1'
 gem 'timezone'
 
 group :development, :test do
